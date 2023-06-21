@@ -66,4 +66,15 @@
     mixins:['xxx']
 
 ### 四.插件
-用于增强vue，本质包含install方法的一个对象，install的第一个参数是vue，第二个以后的参数是插件使用者传递的数据
+
+用于增强 vue，本质包含 install 方法的一个对象，install 的第一个参数是 vue，第二个以后的参数是插件使用者传递的数据
+
+### 五.scoped 关键字
+
+scoped 关键字代表样式仅在该页面生效
+
+    <style>
+    .school{
+      background-color: aqua;
+    }
+    </style>
