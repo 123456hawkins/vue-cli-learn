@@ -3,8 +3,8 @@
     <div class="todo-container">
       <div class="todo-wrap">
         <MyHeader :addTodo="addTodo"/>
-        <MyList :todos="todos" :checkTodo="checkTodo"/>
-        <MyFooter/>
+        <MyList :todos="todos" :checkTodo="checkTodo" :deleteTodo="deleteTodo"/>
+        <MyFooter :todos="todos"/>
       </div>
     </div>
   </div>
@@ -38,6 +38,13 @@ export default {
     checkTodo(id){
       this.todos.forEach((todo)=>{
         if(todo.id===id)todo.done=!todo.done
+      })
+    },
+    // 删除一个todo
+    deleteTodo(id){
+      // 使用过滤器过滤原数组
+      this.todos=this.todos.filter((todo)=>{
+        return todo.id!==id
       })
     }
   }

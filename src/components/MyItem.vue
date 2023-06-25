@@ -6,7 +6,7 @@
         <!-- <input type="checkbox" v-model="todo.done"/> -->
         <span>{{todo.title}}</span>
       </label>
-      <button class="btn btn-danger" style="display:none">删除</button>
+      <button class="btn btn-danger" @click="handleDelete(todo.id)">删除</button>
   </li>
 </template>
 
@@ -14,11 +14,17 @@
 export default {
   name:'MyItem',
   // 声明接收todo对象
-  props:['todo','checkTodo'],
+  props:['todo','checkTodo','deleteTodo'],
   methods: {
     handleCheck(id){
       // 通知App组件将对应数据的属性取反
       this.checkTodo(id)
+    },
+    handleDelete(id){
+      if (confirm('确定删除吗？')) {
+        this.deleteTodo(id)
+      }
+      
     }
   }
 }
@@ -48,7 +54,7 @@ li label li input {
 
 li button {
   float: right;
-  display: none;
+  /* display: none; */
   margin-top: 3px;
 }
 
@@ -58,5 +64,12 @@ li:before {
 
 li:last-child {
   border-bottom: none;
+}
+
+li:hover{
+  background-color: #ddd;
+}
+li:hover button{
+  display: true;
 }
 </style>
