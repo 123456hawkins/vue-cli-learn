@@ -126,3 +126,36 @@ props传过来若是对象类型的值，修改对象中的属性时vue不会报
 6.组件上也可以绑定原生DOM事件，需要使用native修饰符
 
 7.注意：通过`this.$refs.xxx.$on('atguigu',<回调方法>)`绑定自定义事件时，回调要么配置在methods中，要么使用箭头函数，否则this指向会出问题
+
+### 全局事件总线(GlobalEventBus)(父给子传使用props，兄弟之间传用bus)
+
+1.一种组件间通信的方式，适用于任意组件通信
+
+2.安装全局事件总线
+
+    new Vue({
+      .........
+      beforeCreate(){
+        Vue.prototype.$bus=this
+      },
+      ........
+    })
+
+3.使用事件总线：
+
+接收数据：A组件想接收数据，则在A组件中给$bus绑定自定义事件，事件的回调留在A组件自身
+
+    methods(){
+      demo(data){.....}
+    }   
+    .......
+    mounted(){
+      this.$bus.$on('xxxx',this.demo)
+    }
+
+提供数据
+
+    this.$bus.$emit('xxxx',数据)
+
+
+4.最好在beforeDestroy钩子中，用$off去解绑当前组件所用到的事件
