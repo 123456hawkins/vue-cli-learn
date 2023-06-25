@@ -10,7 +10,7 @@
 
      打标识：'<h1 ref="xxx"></h1>'或者'<School ref="xxx"></School>
      获取：this.$refs.xxx
-
+---
 ## 2.配置项 props
 
 ### 1.功能：让组件接收外部传过来的数据
@@ -41,7 +41,7 @@
     }
 
 ### 2.限制：props 是只读的，尽量不要做修改,如果业务确实需要修改，请复制 props 的内容到 data 中然后再去修改
-
+---
 ## 三.mixin 混入
 
 ### 1.功能：可以把多个组件共用的配置提取成一个混入对象
@@ -64,12 +64,14 @@
 （2）局部混入
 
     mixins:['xxx']
-
-### 四.插件
+---
+## 四.插件
 
 用于增强 vue，本质包含 install 方法的一个对象，install 的第一个参数是 vue，第二个以后的参数是插件使用者传递的数据
 
-### 五.scoped 关键字
+---
+
+## 五.scoped 关键字
 
 scoped 关键字代表样式仅在该页面生效
 
@@ -79,7 +81,9 @@ scoped 关键字代表样式仅在该页面生效
     }
     </style>
 
-### 六.案例总结：TodoList案例
+---
+
+## 六.案例总结：TodoList案例
 
 #### 1.组件化编码流程：
 
@@ -127,7 +131,9 @@ props传过来若是对象类型的值，修改对象中的属性时vue不会报
 
 7.注意：通过`this.$refs.xxx.$on('atguigu',<回调方法>)`绑定自定义事件时，回调要么配置在methods中，要么使用箭头函数，否则this指向会出问题
 
-### 全局事件总线(GlobalEventBus)(父给子传使用props，兄弟之间传用bus)
+---
+
+### 七.全局事件总线(GlobalEventBus)(父给子传使用props，兄弟之间传用bus)
 
 1.一种组件间通信的方式，适用于任意组件通信
 
@@ -159,3 +165,38 @@ props传过来若是对象类型的值，修改对象中的属性时vue不会报
 
 
 4.最好在beforeDestroy钩子中，用$off去解绑当前组件所用到的事件
+
+---
+
+## 八.消息订阅与发布(pubsub)
+
+1.一种组件间通信的方式，适用于任意组件间通信
+
+2.使用步骤：
+
+  a.安装pubsub：
+
+    npm i pubsub-js
+
+  b.引入：
+
+    import pubsub from 'pubsub-js'
+
+3.接收数据：A组件想要接收数据，则在A组件中订阅消息，订阅的回调留在A组件自身
+
+    methods(){
+      demo(data){.....}
+    }
+    mounted(){
+      this.pid=pubsub.subscribe('xxx',this.demo)//订阅消息
+    }
+
+4.提供数据：
+
+    pubsub.publish('xxx',数据)
+
+5.最好在beforeDestroy钩子中，用
+
+    PubSub.unsubscribe(pid)
+    
+去取消订阅
