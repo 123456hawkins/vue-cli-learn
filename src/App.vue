@@ -4,7 +4,7 @@
       <div class="todo-wrap">
         <MyHeader :addTodo="addTodo"/>
         <MyList :todos="todos" :checkTodo="checkTodo" :deleteTodo="deleteTodo"/>
-        <MyFooter :todos="todos"/>
+        <MyFooter :todos="todos" :checkAllTodo="checkAllTodo" :clearAllTodo="clearAllTodo"/>
       </div>
     </div>
   </div>
@@ -45,6 +45,20 @@ export default {
       // 使用过滤器过滤原数组
       this.todos=this.todos.filter((todo)=>{
         return todo.id!==id
+      })
+    },
+    //全选或者全取消
+    checkAllTodo(done){
+      this.todos.forEach((todo)=>{
+        todo.done=done
+      })
+      
+    },
+    // 清除所有todo
+    clearAllTodo(){
+      this.todos=this.todos.filter((todo)=>{
+        // 这里面写过滤的条件值
+        return !todo.done
       })
     }
   }
