@@ -1,66 +1,38 @@
 <template>
-  <div id="root">
-    <div class="todo-container">
-      <div class="todo-wrap">
-        <MyHeader :addTodo="addTodo"/>
-        <MyList :todos="todos" :checkTodo="checkTodo" :deleteTodo="deleteTodo"/>
-        <MyFooter :todos="todos" :checkAllTodo="checkAllTodo" :clearAllTodo="clearAllTodo"/>
-      </div>
-    </div>
+  <div>
+    <h1>{{ msg }}</h1>
+    <!-- 通过给父组件绑定一个自定义事件实现子给父传递数据 -->
+    <StudentPage v-on:atguigu="getStudentName"/>
+    <hr>
+    <!-- 传递参数绑定事件 -->
+    <SchoolPage :getSchoolName="getSchoolName"/>
+
+    <!-- 使用ref绑定对象传递数据 -->
+    <StudentPage ref="student"/>
   </div>
-  
 </template>
 
 <script>
-import MyHeader from './components/MyHeader.vue'
-import MyFooter from './components/MyFooter.vue'
-import MyList from './components/MyList.vue'
+import StudentPage from './components/StudentPage.vue'
+import SchoolPage from './components/SchoolPage.vue';
 export default {
   name:'App',
-  components:{MyHeader,MyFooter,MyList},
+  components:{StudentPage,SchoolPage},
   data () {
     return {
-      todos:[
-        {id:'001',title:'抽烟',done:true},
-        {id:'002',title:'喝酒',done:false},
-        {id:'003',title:'打架',done:false},
-        {id:'004',title:'喝茶',done:false},
-        {id:'005',title:'打球',done:false},
-      ]
+      msg:'你好啊'
     }
   },
   methods: {
-    // 接收header函数
-    addTodo(todoObj){
-      this.todos.unshift(todoObj)
+    getSchoolName(name){
+      console.log('app收到了学校名:',name);
     },
-    // 选择或者取消选择一个偷渡
-    checkTodo(id){
-      this.todos.forEach((todo)=>{
-        if(todo.id===id)todo.done=!todo.done
-      })
-    },
-    // 删除一个todo
-    deleteTodo(id){
-      // 使用过滤器过滤原数组
-      this.todos=this.todos.filter((todo)=>{
-        return todo.id!==id
-      })
-    },
-    //全选或者全取消
-    checkAllTodo(done){
-      this.todos.forEach((todo)=>{
-        todo.done=done
-      })
-      
-    },
-    // 清除所有todo
-    clearAllTodo(){
-      this.todos=this.todos.filter((todo)=>{
-        // 这里面写过滤的条件值
-        return !todo.done
-      })
+    getStudentName(name){
+      console.log('demo被调用',name);
     }
+  },
+  mounted () {
+    this.$refs.student.$on('atguigu',this.getStudentName)
   }
   
 
@@ -68,54 +40,5 @@ export default {
 </script>
 
 <style>
- /*base*/
- body {
-  background: #fff;
-}
-
-.btn {
-  display: inline-block;
-  padding: 4px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
-}
-
-.btn-danger {
-  color: #fff;
-  background-color: #da4f49;
-  border: 1px solid #bd362f;
-}
-
-.btn-danger:hover {
-  color: #fff;
-  background-color: #bd362f;
-}
-
-.btn:focus {
-  outline: none;
-}
-
-.todo-container {
-  width: 600px;
-  margin: 0 auto;
-}
-.todo-container .todo-wrap {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-
-
-
-
-
-
 
 </style>
