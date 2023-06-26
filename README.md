@@ -239,3 +239,32 @@ props传过来若是对象类型的值，修改对象中的属性时vue不会报
 ### 4.备注
 
 如果有多个元素需要过渡，则需要使用`<transition-group>`，且每个元素都要指定`key`值
+
+
+## 十一.脚手架配置代理
+
+方法一(只能配置一个代理)：
+
+    module.exports = {
+      devServer: {
+        proxy: 'http://localhost:4000'
+      }
+    }
+
+方法二(方便配置多个代理)：
+
+        module.exports = {
+      devServer: {
+        proxy: {
+          '/api': { //匹配所偶以/api开头的请求路径
+            target: '<url>',//代理目标的基础路径
+            ws: true,
+            changeOrigin: true
+          },
+          '/foo': {
+            target: '<other_url>'
+          }
+        }
+      }
+    }
+    //changOrigin中的true代表请求头的host为localhost:5000，false代表host端口为8000
