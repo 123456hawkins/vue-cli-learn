@@ -210,3 +210,32 @@ props传过来若是对象类型的值，修改对象中的属性时vue不会报
   2.作用：在下一次DOM更新结束后执行其指定的回调
 
   3.什么时候用：当改变更新后，要基于更新的新DOM进行某些操作时，要在nextTick所指定的回调函数中执行
+
+## 十.VUE封装的过渡与动画
+
+### 1.作用：
+在插入、更新或移动DOM元素时，在适合的时候给元素添加样式类名
+
+### 2.相关写法：
+
+进入样式：
+
+    v-enter:进入起点
+    v-enter-active：进入过程中
+    v-enter-to:进入的终点
+
+进入样式：
+
+    v-leave:离开的起点
+    v-leave-active:离开过程中
+    v-leave-to:离开的终点
+
+### 3.使用`<transition>`包裹过渡元素，并配置name信息
+
+    <transition name="hello">
+      <h1 v-show="isShow">你好！</h1>
+    </transition>
+
+### 4.备注
+
+如果有多个元素需要过渡，则需要使用`<transition-group>`，且每个元素都要指定`key`值
