@@ -268,3 +268,87 @@ props传过来若是对象类型的值，修改对象中的属性时vue不会报
       }
     }
     //changOrigin中的true代表请求头的host为localhost:5000，false代表host端口为8000
+
+
+  ## 十二.插槽
+
+  1.作用：让父组件可以向子组件指定位置插入html结构，也是一种组件间通信方式，适用于父组件===>子组件
+
+  2.分类：
+  
+  a>默认插槽
+
+      父组件中:
+
+      <Category>
+        <div>html结构</div>
+      </Category>
+
+      子组件中：
+
+      <template>
+        <div>
+          <slot>插槽默认内容</slot>
+        </div>
+      </template>
+
+  b>具名插槽
+
+    父组件中:
+
+      <Category>
+        <template slot="center">
+          <div>html结构</div>
+        </template>
+        <template slot="footer">
+          <div>html结构</div>
+        </template>
+      </Category>
+
+      子组件中：
+
+      <template>
+        <div>
+          <slot name="center">插槽默认内容</slot>
+          <slot name="footer">插槽默认内容</slot>
+        </div>
+      </template>
+
+  c>作用域插槽
+
+  数据在组件自身，但是数据生成的结构需要有父组件来决定
+
+    子组件：
+    <div class="category">
+      <h3>{{title}}分类</h3>
+      
+      <!-- 定义一个插槽，（挖个坑，等组件的使用者进行填充） -->
+      <slot :meishi="foods">我是一个默认插槽，当使用者没有传递具体结构时，我会出现</slot>
+    </div>
+
+    父组件：
+
+    <categoryPage title="美食" :listData="foods">
+      <template scope="meishi">
+        <ul >
+          <li v-for="(item,index) in meishi" :key="index">{{item}}</li>
+        </ul>
+      </template>
+    </categoryPage>
+    <categoryPage title="美食" :listData="foods">
+      <template scope="meishi">
+        <ul >
+          <h1 v-for="(item,index) in meishi" :key="index">{{item}}</h1>
+        </ul>
+      </template>
+    </categoryPage>
+    <categoryPage title="美食" :listData="foods">
+      <template scope="meishi">
+        <ul >
+          <h3 v-for="(item,index) in meishi" :key="index">{{item}}</h3>
+        </ul>
+      </template>
+    </categoryPage>
+
+
+
