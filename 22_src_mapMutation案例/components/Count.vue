@@ -22,7 +22,7 @@
 import { mapState, mapGetters, mapMutations, mapActions} from 'vuex';
 export default {
   //计数组件
-  name: "CountPage",
+  name: "Count",
   data(){
     return {
       n: 1,// 代表用户在select框开始的时候选择的数字
@@ -36,23 +36,15 @@ export default {
     //   subject: 'subject'
     // }),
     //借助mapState从state中生成计算属性,数组写法(即代表了生成的计算属性名为sum，同时也代表了从state找到sum)
-    ... mapState('countAbout',['sum','school','subject']),
-    ... mapState('personAbout',['personList']),
+    ... mapState(['sum', 'school', 'subject', 'personList']),
 
     //借助mapGetters从getters中生成计算属性,对象写法
     // ...mapGetters({ bigSum: 'bigSum' }),
     //借助mapGetters从getters中生成计算属性,数组写法
-    ...mapGetters('countAbout',['bigSum']),
+    ...mapGetters(['bigSum']),
 
   },
   methods:{
-
-    ...mapMutations('countAbout',{
-      increment: 'INCREMENT',
-      decrement: 'DECREMENT',
-    }),
-    ...mapActions('countAbout',['incrementWait', 'incrementIfOdd']), //数组写法,同上
-
     // increment(){
     //   this.$store.commit('INCREMENT', this.n);
     // },
@@ -60,7 +52,10 @@ export default {
     //   this.$store.commit('DECREMENT', this.n);
     // },
     //借助mapMutations生成对应方法，方法会调用commit去联系mutations，对象写法
-    
+    ...mapMutations({
+      increment: 'INCREMENT',
+      decrement: 'DECREMENT',
+    }),
     //借助数组写法生成方法,但注意你生成的方法名和mutations里对应的方法名将会一样的
     // ...mapMutations(['increment', 'decrement']),
 
@@ -77,6 +72,7 @@ export default {
     //   incrementWait: 'incrementWait',
     // }),
 
+    ...mapActions(['incrementWait', 'incrementIfOdd']), //数组写法,同上
   },
 }
 </script>

@@ -1,19 +1,19 @@
 <template>
    <div>
-     <CountPage/>
+     <Count/>
      <hr/>
-     <PersonPage/>
+     <Person/>
    </div>
 </template>
 
 <script>
-import CountPage from "@/components/CountPage";
-import PersonPage from "@/components/PersonPage";
+import Count from "@/components/Count";
+import Person from "@/components/Person";
 export default {
   name: "App",
   components:{
-    CountPage,
-    PersonPage
+    Count,
+    Person
   },
   mounted() {
     console.log('App', this);
