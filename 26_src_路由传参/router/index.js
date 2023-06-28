@@ -29,8 +29,7 @@ export default new VueRouter({
           component:MessagePage,
           children:[
             {
-              name:'xiangqing',
-              path:'detail/:id/:title',
+              path:'detail',
               component:DetailPage
             }
           ]
