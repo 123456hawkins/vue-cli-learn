@@ -6,13 +6,10 @@ import HomePage from "../pages/HomePage"
 import NewsPage from "../pages/NewsPage"
 
 import MessagePage from "../pages/MessagePage"
-import DetailPage from "../pages/DetailPage"
 
 export default new VueRouter({
   routes:[
     {
-      // 路由命名
-      name:'route1',
       path: '/AboutPage',
       component: AboutPage 
     },
@@ -26,13 +23,7 @@ export default new VueRouter({
         },
         {
           path:'message',
-          component:MessagePage,
-          children:[
-            {
-              path:'detail',
-              component:DetailPage
-            }
-          ]
+          component:MessagePage
         },
       ]
     }
