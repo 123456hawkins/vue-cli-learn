@@ -4,10 +4,10 @@
     <div>
       <ul class="nav nav-tabs">
         <li>
-          <router-link replace class="list-group-item" active-class="active" to="/homePage/news">News</router-link>
+          <router-link class="list-group-item" active-class="active" to="/homePage/news">News</router-link>
         </li>
         <li>
-          <router-link replace class="list-group-item active" active-class="active" to="/homePage/message">Message</router-link>
+          <router-link class="list-group-item active" active-class="active" to="/homePage/message">Message</router-link>
         </li>
       </ul>
       <div>
