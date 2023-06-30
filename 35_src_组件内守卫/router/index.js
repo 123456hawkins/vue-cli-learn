@@ -8,7 +8,11 @@ import NewsPage from "../pages/NewsPage"
 import MessagePage from "../pages/MessagePage"
 import DetailPage from "../pages/DetailPage"
 
+
 const router= new VueRouter({
+  // 使访问路径没有#,当mode为hash时有#，
+  mode:'history',
+
   routes:[
     {
       // 路由命名
