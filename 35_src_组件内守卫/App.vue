@@ -28,7 +28,6 @@ export default {
   components:{
     BannerPage:BannerPage
   },
-  
 }
 </script>
 <style lang="css" scoped>

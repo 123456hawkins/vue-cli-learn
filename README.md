@@ -921,3 +921,13 @@ props传过来若是对象类型的值，修改对象中的属性时vue不会报
    	}
    })
    ```
+5. 组件内守卫：
+
+   ```js
+   //进入守卫：通过路由规则，进入该组件时被调用
+   beforeRouteEnter (to, from, next) {
+   },
+   //离开守卫：通过路由规则，离开该组件时被调用
+   beforeRouteLeave (to, from, next) {
+   }
+   ```
